@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\AbSentClientFull",
+    "\\AbSentClientFull\\AbSent",
+    "\\AbSentClientFull\\AbSent\\comm",
+    "\\AbSentClientFull\\AbSent\\crypto",
+    "\\AbSentClientFull\\AbSent\\info",
+    "\\AbSentClientFull\\AbSent\\tasks"
+  ],
+  "SelectedNode": "\\AbSentClientFull\\AbSent\\config.h",
+  "PreviewInSolutionExplorer": false
+}

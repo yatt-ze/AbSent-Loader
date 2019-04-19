@@ -1,0 +1,8 @@
+﻿  AbSentClientFull.cpp
+f:\documents\programming\absent\client\full\absentclientfull\absentclientfull\absent\config.h(76): warning C4305: 'argument': truncation from '__int64' to 'int'
+f:\documents\programming\absent\client\full\absentclientfull\absentclientfull\absent\config.h(76): warning C4309: 'argument': truncation of constant value
+f:\documents\programming\absent\client\full\absentclientfull\absentclientfull\absent\info\info.h(159): warning C4390: ';': empty controlled statement found; is this the intent?
+f:\documents\programming\absent\client\full\absentclientfull\absentclientfull\absent\info\info.h(178): warning C4244: '=': conversion from 'DWORDLONG' to 'int', possible loss of data
+f:\documents\programming\absent\client\full\absentclientfull\absentclientfull\absent\comm\http.h(83): warning C4390: ';': empty controlled statement found; is this the intent?
+  LINK : F:\Documents\Programming\AbSent\Client\Full\AbSentClientFull\Debug\smss.exe not found or not built by the last incremental link; performing full link
+  AbSentClientFull.vcxproj -> F:\Documents\Programming\AbSent\Client\Full\AbSentClientFull\Debug\smss.exe
