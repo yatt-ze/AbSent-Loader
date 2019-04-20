@@ -21,6 +21,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AbSent\tasks\update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbSent\tasks\uninstall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

