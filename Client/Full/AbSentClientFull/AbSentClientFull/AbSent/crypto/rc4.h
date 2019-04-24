@@ -11,6 +11,8 @@
 #ifndef rc4_rc4_h
 #define rc4_rc4_h
 
+#define BUFFER 1024
+
 namespace absent
 {
 	namespace crypto
@@ -30,20 +32,20 @@ namespace absent
 			}
 
 		private:
-			int S[256];
-			char k[256];
+			int S[BUFFER];
+			char k[BUFFER];
 			void ksa(std::string key, int keylength)
 			{
-				for (int i = 0; i < 256; i++)
+				for (int i = 0; i < BUFFER; i++)
 				{
 					S[i] = i;
 				}
 
 				int j = 0, temp;
 
-				for (int i = 0; i < 256; i++)
+				for (int i = 0; i < BUFFER; i++)
 				{
-					j = (j + S[i] + key[i % keylength]) % 256;
+					j = (j + S[i] + key[i % keylength]) % BUFFER;
 					temp = S[i];
 					S[i] = S[j];
 					S[j] = temp;
@@ -54,12 +56,12 @@ namespace absent
 				int i = 0, j = 0, x = 0, temp;
 				for (x = 0; x < len; x++)
 				{
-					i = (i + 1) % 256;
-					j = (j + S[i]) % 256;
+					i = (i + 1) % BUFFER;
+					j = (j + S[i]) % BUFFER;
 					temp = S[i];
 					S[i] = S[j];
 					S[j] = temp;
-					k[x] = in[x] ^ S[(S[i] + S[j]) % 256];
+					k[x] = in[x] ^ S[(S[i] + S[j]) % BUFFER];
 				}
 				k[x] = '\0';
 				return k;

@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbSent\comm\panel.h" />
     <ClInclude Include="AbSent\tasks\uninstall.h" />
     <ClInclude Include="AbSent\tasks\update.h" />
     <ClInclude Include="stdafx.h" />

