@@ -11,7 +11,7 @@
 #ifndef rc4_rc4_h
 #define rc4_rc4_h
 
-#define BUFFER 1024
+#define BUFFER 256
 
 namespace absent
 {

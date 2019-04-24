@@ -57,10 +57,10 @@ namespace absent
 					{"installPath", installPath},
 					{"cpu", cpu},
 					{"cpuArchitecture", cpuArchitecture},
-					{"cpuCores", cpuCores},
+					{"cpuCores", std::to_string(cpuCores)},
 					{"gpu", gpu},
-					{"ram", ram},
-					{"vram", vram},
+					{"ram", std::to_string(ram)},
+					{"vram", std::to_string(vram)},
 					{"installedPrograms", installedPrograms}
 				};
 				return jInfo;
