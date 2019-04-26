@@ -38,6 +38,7 @@ namespace absent
 			nlohmann::json getJson(std::string buildName, std::string buildType, std::string build)
 			{
 				nlohmann::json jInfo = {
+					{"check", "check"}, //Check Variable for panel
 					{"bn", buildName},
 					{"bt", buildType},
 					{"bu", build},

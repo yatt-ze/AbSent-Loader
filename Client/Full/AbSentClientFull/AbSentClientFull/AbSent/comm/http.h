@@ -27,14 +27,17 @@ namespace absent
 			std::stringstream ss; ss << data.length();
 			
 			std::stringstream request2;
-			request2 << "POST " << path << " HTTP/1.1" << std::endl;
-			request2 << "User-Agent: Absent" << std::endl;
-			request2 << "Host: " << host << std::endl;
-			request2 << "Content-Length: " << data.length() << std::endl;
-			request2 << "Content-Type: application/x-www-form-urlencoded" << std::endl;
-			request2 << "Accept-Language: en-au" << std::endl << std::endl;
+			request2 << "POST " << path << " HTTP/1.1" << "\r\n";
+			request2 << "User-Agent: Absent" << "\r\n";
+			request2 << "Host: " << host << "\r\n";
+			request2 << "Content-Length: " << data.length() << "\r\n";
+			request2 << "Content-Type: application/x-www-form-urlencoded" << "\r\n";
+			request2 << "Accept-Language: en-au" << "\r\n" << "\r\n";
 			request2 << data;
 			std::string request = request2.str();
+
+			/*std::cout << request << std::endl << std::endl;*/
+			
 			if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0) return "RQF";
 			if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) return "RQF";
 			hostent * record = gethostbyname(host.c_str());

