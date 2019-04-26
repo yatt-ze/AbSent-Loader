@@ -21,6 +21,19 @@ So easy I've knowen people to exclusively build their botnet from others vulnera
 The architecture of these Php based control panels is very simple, they have a PHP file usually called something like "gate.php" or something not so obvious like "store.php", this page is the contact point for the client.
 The client will send a `POST` request (Some use `GET`) to the page containing the clients' information, and the page will respond with a command to execute. The way the commands are sent and phrased are different for every variant but is usually done with `JSON` or plain text. 
 If done properly the page will verify the client is legit and make sure the supplied data isn't an XSS or an SQLi attack, and add it to the panel's database.
+
 ___
+
+## The Standard Client Loop
+
+The client is what runs on an infected system, its job is simple, stay hidden and execute tasks.
+
+On executing the client will try to "*Make itself at home*" that is, become persistent in the system, setting up defences to stop itself being killed and making sure its run when the system turns on again, it will also attempt to collect as much information about the computer it can, what version of the Operating System its running on, What privileges it has, the username, etc. It then gathers all this Information and sends it off to the C&C, receiving any tasks back and acting upon them. Some clients will try to be clever about the way it goes about this, commonly waiting for a while before actually executing anything to seem less suspicious.
+
+
+
+Afterwards we enter the "*loop*" the client will go dormant for a set amount of time, usually around the 5 minute mark before reaching out for any new commands and letting the C&C know its still alive. Reason being to lighten the network load of the server and the infected system, the bigger the network, usually the longer the wait.
+
+---
 
 *Disclaimer: I do not accept responsibility for the misuse of provided code blah blah blah don't be a cunt*
