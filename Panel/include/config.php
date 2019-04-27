@@ -1,13 +1,13 @@
 <?php
-$dbhost = ""; 		// The host of your database
-$dbuser = ""; 			// The database username
-$dbpass = ""; 	// The database password
-$dbname = ""; 		// The database name
+$dbhost = "localhost"; 		// The host of your database
+$dbuser = "root"; 			// The database username
+$dbpass = "toor"; 	// The database password
+$dbname = "Absent"; 		// The database name
 
 $rc4Key = "AAAA";
 
-//$odb = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-
+$odb = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+$odb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 function loggedIn($odb)
 {
 	if (isset($_SESSION['AbSent']))
