@@ -84,7 +84,7 @@ namespace absent
 
 				return config(ek, pu, gp, bn, ri, pn);
 			}
-			return config("ERROR", "ERROR", "ERROR", "ERROR", 0, {});
+			return config("AAAA", "server.com", "/New/gate.php", "Test", 5, {});
 		}
 	}
 }

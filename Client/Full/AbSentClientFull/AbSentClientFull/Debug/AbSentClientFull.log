@@ -1,11 +1,10 @@
 ﻿  AbSentClientFull.cpp
 f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\config.h(76): warning C4305: 'argument': truncation from '__int64' to 'int'
 f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\config.h(76): warning C4309: 'argument': truncation of constant value
-f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(7): warning C4305: 'argument': truncation from '__int64' to 'int'
-f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(7): warning C4309: 'argument': truncation of constant value
-f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(175): warning C4390: ';': empty controlled statement found; is this the intent?
-f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(194): warning C4244: '=': conversion from 'DWORDLONG' to 'int', possible loss of data
+f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(9): warning C4305: 'argument': truncation from '__int64' to 'int'
+f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(9): warning C4309: 'argument': truncation of constant value
+f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(185): warning C4390: ';': empty controlled statement found; is this the intent?
+f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\info\info.h(204): warning C4244: '=': conversion from 'DWORDLONG' to 'int', possible loss of data
 f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\comm\http.h(86): warning C4390: ';': empty controlled statement found; is this the intent?
-f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\comm\panel.h(30): warning C4018: '<': signed/unsigned mismatch
-  LINK : F:\Documents\Programming\absent-loader\Client\Full\AbSentClientFull\Debug\smss.exe not found or not built by the last incremental link; performing full link
+f:\documents\programming\absent-loader\client\full\absentclientfull\absentclientfull\absent\comm\panel.h(22): warning C4018: '<': signed/unsigned mismatch
   AbSentClientFull.vcxproj -> F:\Documents\Programming\absent-loader\Client\Full\AbSentClientFull\Debug\smss.exe

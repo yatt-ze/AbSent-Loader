@@ -1,4 +1,5 @@
-﻿  AbSent Builder.cpp
-f:\documents\programming\absent\builder\absent builder\absent builder\absent builder.cpp(70): warning C4305: 'argument': truncation from '__int64' to '::size_t'
-f:\documents\programming\absent\builder\absent builder\absent builder\absent builder.cpp(70): warning C4309: 'argument': truncation of constant value
-  AbSent Builder.vcxproj -> F:\Documents\Programming\AbSent\Builder\AbSent Builder\Debug\AbSent Builder.exe
+﻿  stdafx.cpp
+  AbSent Builder.cpp
+f:\documents\programming\absent-loader\builder\console\absent builder\absent builder\absent builder.cpp(70): warning C4305: 'argument': truncation from '__int64' to '::size_t'
+f:\documents\programming\absent-loader\builder\console\absent builder\absent builder\absent builder.cpp(70): warning C4309: 'argument': truncation of constant value
+  AbSent Builder.vcxproj -> F:\Documents\Programming\absent-loader\Builder\Console\AbSent Builder\Debug\AbSent Builder.exe

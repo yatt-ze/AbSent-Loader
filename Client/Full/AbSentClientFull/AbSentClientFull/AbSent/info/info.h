@@ -3,6 +3,8 @@
 #include <Lmcons.h>
 #include <intrin.h>
 #include <list>
+#include <Iphlpapi.h>
+#pragma comment (lib,"Iphlpapi.lib") 
 
 std::string k = key(0x2cb62029b6082afc);
 
@@ -65,6 +67,14 @@ namespace absent
 			void getHardwareID()
 			{
 
+				IP_ADAPTER_INFO AdapterInfo[18];
+				DWORD dwBufLen = sizeof(AdapterInfo);
+				DWORD dwStatus = GetAdaptersInfo(AdapterInfo, &dwBufLen);
+				assert(dwStatus == ERROR_SUCCESS);
+				PIP_ADAPTER_INFO pAdapterInfo = AdapterInfo;
+				char mac_addr[18];
+				sprintf(mac_addr, "%02X-%02X-%02X-%02X-%02X-%02X", pAdapterInfo->Address[0], pAdapterInfo->Address[1], pAdapterInfo->Address[2], pAdapterInfo->Address[3], pAdapterInfo->Address[4], pAdapterInfo->Address[5]);
+				hardwareID = mac_addr;
 			}
 			void getUserName()
 			{
