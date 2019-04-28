@@ -1,5 +1,8 @@
 # AbSent-Loader
 Example Loader to be used as a learning resource for people interested in how commercially available malware is made.
+
+Join the discussion on discord: https://discord.gg/AMs6DA9
+
 ## Definition of a loader
 A "Loader" or "Dropper" is a type of malware not dissimilar to a botnet, usually built on the same C&C architecture they lack some of the more advanced features a fully featured botnet might have and instead try to be as lightweight as possible to be used as the 1st stage in an attack. 
 
