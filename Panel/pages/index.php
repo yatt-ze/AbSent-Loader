@@ -1,7 +1,7 @@
 <?php
 //include '../include/session.php';
-//include '../include/geo.php';
-//include '../include/stats.php';
+include '../include/geo.php';
+include '../include/stats.php';
 //$userperms = $odb->query("SELECT privileges FROM users WHERE username = '".$username."'")->fetchColumn(0);
 ?>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -25,19 +25,12 @@
         function drawRegionsMap() {
             var data = google.visualization.arrayToDataTable([
                 ['Country', 'Clients'],
-                ['Germany', 200],
-                ['United States', 300],
-                ['Brazil', 400],
-                ['Canada', 500],
-                ['France', 600],
-                ['RU', 700]
                 <?php
-                //$csel = $odb->query("SELECT country, COUNT(*) AS cnt FROM bots GROUP BY country ORDER BY cnt");
-                //while ($c = $csel->fetch())
-                //{
-                //    echo '[\'' . countryCodeToCountry($c[0]) . '\',';
-                //    echo $c[1] . '],' . PHP_EOL;
-                //}
+                $csel = $odb->query("SELECT country, COUNT(*) AS cnt FROM clients GROUP BY country ORDER BY cnt");
+                while ($c = $csel->fetch())
+                {
+                    echo "['".$c[0]."', '".$c[1]."'],".PHP_EOL;
+                }
                 ?>
             ]);
             var options = {
@@ -99,10 +92,6 @@
                 <i class="material-icons" role="presentation">dashboard</i>
                 Dashboard
             </a>
-            <a class="mdl-navigation__link" href="statistics.php">
-                <i class="material-icons" role="presentation">show_chart</i>
-                Statistics
-            </a>
             <a class="mdl-navigation__link" href="clients.php">
                 <i class="material-icons" role="presentation">person</i>
                 Clients
@@ -123,7 +112,7 @@
                         </div>
                         <div class="mdl-card__supporting-text">
                             <div class="">
-                                <center><h1>$total</h1></center>
+                                <center><h1><?php echo $total ?></h1></center>
                             </div>
                         </div>
                     </div>
@@ -135,7 +124,7 @@
                         </div>
                         <div class="mdl-card__supporting-text">
                             <div class="">
-                                <center><h1>$online</h1></center>
+                                <center><h1><?php echo $online ?></h1></center>
                             </div>
                         </div>
                     </div>
@@ -147,7 +136,7 @@
                         </div>
                         <div class="mdl-card__supporting-text">
                             <div class="">
-                                <center><h1>$offline</h1></center>
+                                <center><h1><?php echo $offline ?></h1></center>
                             </div>
                         </div>
                     </div>
@@ -159,7 +148,7 @@
                         </div>
                         <div class="mdl-card__supporting-text">
                             <div class="">
-                                <center><h1>$dead</h1></center>
+                                <center><h1><?php echo $dead ?></h1></center>
                             </div>
                         </div>
                     </div>

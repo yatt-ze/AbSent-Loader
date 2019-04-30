@@ -41,6 +41,8 @@ function decryptClient($rc4Key, $info, $new)
 if($_POST['new'] == "true")  { $clientInfo = decryptClient($rc4Key, json_decode(base64_decode($_POST['request']), true), true); }
 if($_POST['new'] == "false") { $clientInfo = decryptClient($rc4Key, json_decode(base64_decode($_POST['request']), true), false); }
 
+print_r($clientInfo);
+
 $exs = $odb->prepare("SELECT COUNT(*) FROM clients WHERE hwid = :h");
 $exs->execute(array(":h" => $clientInfo['hwid']));
 if ($exs->fetchColumn(0) == "0")
@@ -69,5 +71,4 @@ foreach ($responce as $key => $value)
 }
 
 $responce = base64_encode(json_encode($responce));
-print_r($clientInfo);
 ?>

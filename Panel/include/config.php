@@ -8,6 +8,19 @@ $rc4Key = "AAAA";
 
 $odb = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 $odb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+
+function timeAgo($time_ago)
+{
+	$ctime = time();
+	$difference = $ctime - $time_ago;
+	$periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+	$lengths = array("60","60","24","7","4.35","12","10");
+	for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) { $difference /= $lengths[$j];  }
+	$difference = round($difference);
+	if($difference != 1){ $periods[$j].= "s"; }
+	return "$difference $periods[$j] ago";
+}
+
 function loggedIn($odb)
 {
 	if (isset($_SESSION['AbSent']))

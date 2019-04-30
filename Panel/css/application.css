@@ -447,6 +447,11 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+
+   .full-width {
+    width: 100%;
+}
+
 html {
   color: rgba(0,0,0, 0.87);
   font-size: 1em;
@@ -7606,7 +7611,8 @@ input.mdl-button[type="submit"] {
 .mdl-layout__tab-bar {
   height: 96px;
   margin: 0;
-  width: calc(100% - 112px);
+  width: calc(100% -
+ 112px);
   padding: 0 0 0 56px;
   display: flex;
   background-color: #242424;
@@ -7616,17 +7622,21 @@ input.mdl-button[type="submit"] {
     display: none; }
   .mdl-layout--no-drawer-button .mdl-layout__tab-bar {
     padding-left: -4px;
-    width: calc(100% - -8px); }
+    width: calc(100% -
+ -8px); }
   @media screen and (min-width: 1441px) {
     .mdl-layout--no-desktop-drawer-button .mdl-layout__tab-bar {
       padding-left: -4px;
-      width: calc(100% - -8px); } }
+      width: calc(100% -
+ -8px); } }
   @media screen and (max-width: 1440px) {
     .mdl-layout__tab-bar {
-      width: calc(100% - 60px);
+      width: calc(100% -
+ 60px);
       padding: 0 0 0 60px; }
       .mdl-layout--no-drawer-button .mdl-layout__tab-bar {
-        width: calc(100% - -8px);
+        width: calc(100% -
+ -8px);
         padding-left: -4px; } }
   .mdl-layout--fixed-tabs .mdl-layout__tab-bar {
     padding: 0;
@@ -11028,11 +11038,10 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
       margin-left: 91.66667%; } }
 
 .mdl-layout {
-  background: #202020; }
+  background: #9E9E9E; }
 
 main {
-  background: url("../images/Dark_background_1920x1080.png") center top no-repeat;
-  background-size: cover; }
+  }
 
 .mdl-layout__header {
   width: 100% !important;
