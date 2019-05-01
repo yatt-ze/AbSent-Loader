@@ -1,8 +1,8 @@
 <?php
-//include '../include/session.php';
+include '../include/session.php';
 include '../include/geo.php';
 include '../include/stats.php';
-//$userperms = $odb->query("SELECT privileges FROM users WHERE username = '".$username."'")->fetchColumn(0);
+$userperms = $odb->query("SELECT permissions FROM users WHERE username = '".$username."'")->fetchColumn(0);
 
 $details = $odb->prepare("SELECT * FROM clients WHERE id = :id");
 $details->execute(array(":id" => $_GET['id']));
@@ -29,7 +29,7 @@ $details = $details->fetch(PDO::FETCH_ASSOC);
             <div class="mdl-layout-spacer"></div>
 
             <div class="avatar-dropdown" id="icon">
-                <span>$username</span>
+            <span><?php echo $username; ?></span>
                 <img src="../images/avatar.png">
             </div>
 
@@ -38,8 +38,8 @@ $details = $details->fetch(PDO::FETCH_ASSOC);
                 for="icon">
                 <li class="mdl-list__item mdl-list__item--two-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>$username</span>
-                        <span class="mdl-list__item-sub-title">$userperms</span>
+                    <span><?php echo $username; ?></span>
+                    <span class="mdl-list__item-sub-title"><?php echo $userperms; ?></span>
                     </span>
                 </li>
                 <li class="list__item--border-top"></li>

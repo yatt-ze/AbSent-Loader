@@ -1,8 +1,8 @@
 <?php
-//include '../include/session.php';
+include '../include/session.php';
 include '../include/geo.php';
 include '../include/stats.php';
-//$userperms = $odb->query("SELECT privileges FROM users WHERE username = '".$username."'")->fetchColumn(0);
+$userperms = $odb->query("SELECT permissions FROM users WHERE username = '".$username."'")->fetchColumn(0);
 ?>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -29,13 +29,13 @@ include '../include/stats.php';
                 $csel = $odb->query("SELECT country, COUNT(*) AS cnt FROM clients GROUP BY country ORDER BY cnt");
                 while ($c = $csel->fetch())
                 {
-                    echo "['".$c[0]."', '".$c[1]."'],".PHP_EOL;
+                    echo "['".$c[0]."', ".$c[1]."],".PHP_EOL;
                 }
                 ?>
             ]);
             var options = {
                 backgroundColor: '#4e4e4e',
-                colorAxis: {colors: ['white', '#00bcd4']},
+                colorAxis: {colors: ['white', '#00bcd4']}
             };
             var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
             chart.draw(data, options);
@@ -49,7 +49,7 @@ include '../include/stats.php';
             <div class="mdl-layout-spacer"></div>
 
             <div class="avatar-dropdown" id="icon">
-                <span>$username</span>
+                <span><?php echo $username; ?></span>
                 <img src="../images/avatar.png">
             </div>
 
@@ -58,8 +58,8 @@ include '../include/stats.php';
                 for="icon">
                 <li class="mdl-list__item mdl-list__item--two-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>$username</span>
-                        <span class="mdl-list__item-sub-title">$userperms</span>
+                        <span><?php echo $username; ?></span>
+                        <span class="mdl-list__item-sub-title"><?php echo $userperms; ?></span>
                     </span>
                 </li>
                 <li class="list__item--border-top"></li>
@@ -76,7 +76,7 @@ include '../include/stats.php';
                     </a>
                 </li>
                 <li class="mdl-menu__item mdl-list__item">
-                    <a href="logout.php" class="mdl-list__item-primary-content">
+                    <a href="../include/logout.php?logout=1" class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon">exit_to_app</i>
                         Logout
                     </a>
