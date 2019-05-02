@@ -57,7 +57,6 @@ namespace absent
 					{"ra", std::to_string(ram)},
 					{"vr", std::to_string(vram)},
 					{"fp", installedPrograms},
-					{"ct", "N/A"}
 				};
 				return jInfo;
 			}

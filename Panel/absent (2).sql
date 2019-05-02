@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 01, 2019 at 07:22 AM
+-- Generation Time: May 02, 2019 at 06:14 AM
 -- Server version: 5.7.19-log
 -- PHP Version: 5.6.31
 
@@ -56,11 +56,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `clients`
---
-
-TRUNCATE TABLE `clients`;
 -- --------------------------------------------------------
 
 --
@@ -74,11 +69,6 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `gate_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `settings`
---
-
-TRUNCATE TABLE `settings`;
 --
 -- Dumping data for table `settings`
 --
@@ -94,7 +84,7 @@ INSERT INTO `settings` (`knock`, `dead`, `gate_status`) VALUES
 
 DROP TABLE IF EXISTS `tasks`;
 CREATE TABLE IF NOT EXISTS `tasks` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `taskId` varchar(100) DEFAULT NULL,
   `task` varchar(100) DEFAULT NULL,
   `parameters` varchar(100) DEFAULT NULL,
@@ -102,16 +92,12 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `author` varchar(100) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `date` int(11) DEFAULT NULL,
+  `total` int(11) NOT NULL,
   `compleated` int(11) DEFAULT NULL,
   `failed` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `tasks`
---
-
-TRUNCATE TABLE `tasks`;
 -- --------------------------------------------------------
 
 --
@@ -120,19 +106,14 @@ TRUNCATE TABLE `tasks`;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `status` int(11) NOT NULL,
   `permissions` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `users`
---
-
-TRUNCATE TABLE `users`;
 --
 -- Dumping data for table `users`
 --

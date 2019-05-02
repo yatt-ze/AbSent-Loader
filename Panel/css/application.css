@@ -451,6 +451,9 @@
    .full-width {
     width: 100%;
 }
+.extrawide{
+  width: 500px;
+}
 
 html {
   color: rgba(0,0,0, 0.87);
