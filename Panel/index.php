@@ -29,7 +29,7 @@
 <body >
 
 <div class="mdl-layout mdl-js-layout color--gray is-small-screen login">
-    <main class="mdl-layout__content">
+    <main class="mdl-layout">
     
     <?php
     if (isset($_POST['doLogin']))
@@ -37,7 +37,6 @@
         $username = $_POST['username'];
         $cpass = $_POST['password'];
         $password = hash("sha256", $_POST['password']);
-        echo $password;
         if (ctype_alnum($username))
         {
             $sel = $odb->prepare("SELECT id,password,status FROM users WHERE username = :user");

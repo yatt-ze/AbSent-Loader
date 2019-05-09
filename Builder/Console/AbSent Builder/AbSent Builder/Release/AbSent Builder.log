@@ -1,0 +1,8 @@
+﻿  stdafx.cpp
+  AbSent Builder.cpp
+f:\documents\programming\absent-loader\builder\console\absent builder\absent builder\absent builder.cpp(70): warning C4305: 'argument': truncation from '__int64' to '::size_t'
+f:\documents\programming\absent-loader\builder\console\absent builder\absent builder\absent builder.cpp(70): warning C4309: 'argument': truncation of constant value
+  Generating code
+  All 781 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  AbSent Builder.vcxproj -> F:\Documents\Programming\absent-loader\Builder\Console\AbSent Builder\Release\AbSent Builder.exe

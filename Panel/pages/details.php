@@ -56,7 +56,7 @@ $details = $details->fetch(PDO::FETCH_ASSOC);
                     </a>
                 </li>
                 <li class="mdl-menu__item mdl-list__item">
-                    <a href="logout.php" class="mdl-list__item-primary-content">
+                    <a href="../include/logout.php?logout=1" class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-icon">exit_to_app</i>
                         Logout
                     </a>
